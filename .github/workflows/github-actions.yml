@@ -13,9 +13,11 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.KEY }} # cat ~/.ssh/id_rsa
           port: ${{ secrets.PORT }}
-          script: whoami
+          script: |
+            whoami
+            ls -la
 
 
 #    steps:

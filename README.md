@@ -4,14 +4,20 @@ Projeto de estudo de implantação de container com a digital ocean
 
 
 
-### Primeiro Passo
+### Configuração do github actions
 
+Criar par de chave
+    nome : ssh manjaro casa
+    conteudo da chave pública cat ~/.ssh/id_rsa.pub
+    
+    
+Para fazer o ssh basta:
 
-
+```
+ssh root@167.71.240.178
 ```
 
 
+Examplo do github actions
 
-```
-
-test
+    https://github.com/appleboy/ssh-action
