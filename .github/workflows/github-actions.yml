@@ -65,7 +65,7 @@ jobs:
             # Run a new container from a new image
             docker run -d \
             --restart always \
-            --expose 80 \
+            -p 80:80 \
             --name $(echo $IMAGE_NAME) \
             $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
             
