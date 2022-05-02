@@ -64,9 +64,9 @@ jobs:
             docker rm $(echo $IMAGE_NAME)
             # Run a new container from a new image
             docker run -d \
-            --restart always \
-            -p 80:80 \
+            --restart always \            
             --name $(echo $IMAGE_NAME) \
+            -p 80:80 \
             $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
             
 #name: GitHub Actions Demo
