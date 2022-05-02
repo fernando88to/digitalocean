@@ -68,7 +68,6 @@ jobs:
             --name $(echo $IMAGE_NAME) \
             $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
             
-
 #name: GitHub Actions Demo
 #on:
 #  push:
