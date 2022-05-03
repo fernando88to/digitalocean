@@ -76,6 +76,5 @@ docker login registry.digitalocean.com
 * Adiciona o dominio e verifica se o dominio está livre, se estiver vai aparecer vários dados em abaixo.
 * Vai no registro BR e já coloca os 3 DNS padrão da digital ocean
 * Pronto
-* Para funcionar com www, vai na seção de registros opção 'A' no hostname coloca 'www', para qual drop irá 
-* redirecionar e criar o record. Para esse isso funcionar tem que configurar no nginx. 
+* Para funcionar com www, vai na seção de registros opção 'CNAME' no hostname coloca 'www' , alias '@'. Para esse isso funcionar tem que configurar no nginx. 
 
