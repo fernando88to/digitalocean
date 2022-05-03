@@ -7,9 +7,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - web-root:/var/www/html
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
+      - public:/var/www/html
+      - certbot-conf:/etc/nginx/ssl
+      - certbot-data:/var/www/certbot
     restart: unless-stopped
     networks:
       - default
@@ -18,9 +18,9 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - web-root:/var/www/html
+      - certbot-conf:/etc/letsencrypt
+      - certbot-logs:/var/log/letsencrypt
+      - certbot-data:/var/www/certbot
     depends_on:
       - nginx_dev
     command: certonly --webroot --webroot-path=/var/www/html --email fernando88to@gmail.com --agree-tos --no-eff-email --staging -d applicacao.dev.br  -d applicacao.dev.br
@@ -29,9 +29,10 @@ services:
 
 
 volumes:
-  certbot-etc:
-  certbot-var:
-  web-root:
+  certbot-conf:
+  certbot-data:
+  certbot-logs:
+  public:
 
 networks:
   default:
