@@ -75,8 +75,9 @@ jobs:
           envs: IMAGE_NAME,REGISTRY,{{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }},GITHUB_SHA
           script: |            
             # Login to registry
-            docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com
-            cd /app/nginx
+            docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com            
+            #cd /app/nginx
+            #docker-compose down
             #docker-compose up -d --build
             
             
