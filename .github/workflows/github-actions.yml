@@ -82,8 +82,8 @@ jobs:
             cd /app/nginx
             # Stop running container
             #docker-compose down
-            echo $(docker-compose  up -e TAG=$(echo $GITHUB_SHA | head -c7) -d) > /tmp/images.txt 
-            #docker-compose  up -e TAG=$(echo $GITHUB_SHA | head -c7) -d
+            #echo docker-compose  up -e TAG=$(echo $GITHUB_SHA | head -c7) -d > /tmp/images.txt 
+            docker-compose  up -e TAG=$(echo $GITHUB_SHA | head -c7) -d
             #docker system prune --all -f
             
             
