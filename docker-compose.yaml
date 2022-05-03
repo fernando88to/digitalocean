@@ -6,17 +6,32 @@ services:
     image: "registry.digitalocean.com/fernando88to/nginx_load_balancer_proxy:${TAG_NGINX}"
     ports:
       - "80:80"
-#    volumes:
-#      - certbot-etc:/etc/letsencrypt
-#      - certbot-var:/var/lib/letsencrypt
+    volumes:
+      - web-root:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     restart: unless-stopped
     networks:
       - default
 
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - nginx_dev
+    command: certonly --webroot --webroot-path=/var/www/html --email fernando88to@gmail.com --agree-tos --no-eff-email --staging -d applicacao.dev.br  -d applicacao.dev.br
+    networks:
+      - default
 
-#volumes:
-#  certbot-etc:
-#  certbot-var:
+
+volumes:
+  certbot-etc:
+  certbot-var:
+  web-root:
 
 networks:
   default:
