@@ -71,6 +71,7 @@ jobs:
             docker rm $(echo $IMAGE_NAME)
             # Run a new container from a new image
             docker run -d \
+            --restart always \
             -it \
             -p 80:80 \
             --name $(echo $IMAGE_NAME) \
