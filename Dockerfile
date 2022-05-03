@@ -1,6 +1,7 @@
 FROM nginx:1.17.9
 
 COPY ./nginx/index.html /usr/share/nginx/html/index.html
+COPY ./nginx/index2.html /usr/share/nginx/html/index2.html
 #COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 #EXPOSE 80
 
