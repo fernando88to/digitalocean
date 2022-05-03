@@ -60,4 +60,13 @@ docker login registry.digitalocean.com
 ```
 
 
+### Processo de registro do domínio
+
+* Criar um registro no registro.br
+* Depois de pago e registrado 
+* Na digital ocean vai no menu lateral Networking e adiciona o dominio apotando para um droplet
+* Ainda na digital ocean 
+* Abre o registro.br e vai para a seção de registro (DNS) seleciona 
+
+
 
