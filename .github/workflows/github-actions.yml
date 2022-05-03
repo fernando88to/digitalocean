@@ -56,14 +56,13 @@ jobs:
           key: ${{ secrets.KEY }} # cat ~/.ssh/id_rsa
           envs: IMAGE_NAME,REGISTRY,{{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }},GITHUB_SHA
           script: |
+            scp  -o StrictHostKeyChecking=no -r ./docker-compose.yaml root@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/app/nginx
             # Login to registry
-            docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com
-            # Stop running container
-            docker stop $(echo $IMAGE_NAME)
-            # Remove old container
-            docker rm $(echo $IMAGE_NAME)
-            # Run a new container from a new image
-            #docker run -d -it  -p 80:80 --name $(echo $IMAGE_NAME) $(echo $REGISTRY)/$(echo $IMAGE_NAME):latest
+            #docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com
+            
+            
+            
+            
 
 #name: GitHub Actions Demo
 #on:
