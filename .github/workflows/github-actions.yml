@@ -77,7 +77,7 @@ jobs:
             $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
             # remove image not used anymore minus the last image
             #docker rmi $(docker images $(echo $REGISTRY)/$(echo $IMAGE_NAME) -q | grep -v echo $IMAGE_NAME))
-            docker images  $(echo $REGISTRY)/$(echo $IMAGE_NAME) -q | grep -v echo $IMAGE_NAME) >> /tmp/images.txt
+            docker images  $(echo $REGISTRY)/$(echo $IMAGE_NAME) -q | grep -v $(echo $IMAGE_NAME) >> /tmp/images.txt
             
             
             
