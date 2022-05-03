@@ -63,6 +63,8 @@ jobs:
           script: |
             # Login to registry
             docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com
+            # remove all old images
+            docker image rm $(echo $REGISTRY)/$(echo $IMAGE_NAME)
             # Stop running container
             docker stop $(echo $IMAGE_NAME)
             # Remove old container
