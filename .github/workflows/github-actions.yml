@@ -82,7 +82,7 @@ jobs:
             cd /app/nginx
             # Stop running container
             docker-compose down
-            docker-compose up -d
+            docker-compose  -e TAG=$(echo $GITHUB_SHA | head -c7) up -d
             #docker system prune --all -f
             
             

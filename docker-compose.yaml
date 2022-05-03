@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   nginx_dev:
-    image: registry.digitalocean.com/fernando88to/nginx_load_balancer_proxy
+    image: registry.digitalocean.com/fernando88to/nginx_load_balancer_proxy${TAG}
     ports:
       - "80:80"
 #    volumes:
