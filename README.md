@@ -70,3 +70,11 @@ docker login registry.digitalocean.com
 
 
 
+### Registro do dominio
+
+* Vai no menu lateral em doplets, seleciona o droplet e vai para a opção 'Add a domain'
+* Adiciona o dominio e verifica se o dominio está livre, se estiver vai aparecer vários dados em abaixo.
+* Vai no registro BR e já coloca os 3 DNS padrão da digital ocean
+* Pronto
+* Para funcionar com www, vai na seção de registros opção 'A' no hostname coloca 'www', para qual drop irá redirecionar e criar o record.
+
