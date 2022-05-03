@@ -76,5 +76,11 @@ docker login registry.digitalocean.com
 * Adiciona o dominio e verifica se o dominio está livre, se estiver vai aparecer vários dados em abaixo.
 * Vai no registro BR e já coloca os 3 DNS padrão da digital ocean
 * Pronto
-* Para funcionar com www, vai na seção de registros opção 'CNAME' no hostname coloca 'www' , alias '@'. Para esse isso funcionar tem que configurar no nginx. 
+* Para funcionar com www, vai na seção de registros opção 'CNAME' no hostname coloca 'www' , alias '@'. Para esse isso funcionar tem que configurar no nginx.
+
+### Configuração do lestencrypt
+
+https://mindsers.blog/post/https-using-nginx-certbot-docker/
+https://www.cloudbooklet.com/how-to-install-nginx-and-lets-encrypt-with-docker-ubuntu-20-04/
+
 
