@@ -81,8 +81,7 @@ jobs:
             docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
             cd /app/nginx
             # Stop running container
-            #docker-compose down
-            #echo docker-compose  up -e TAG=$(echo $GITHUB_SHA | head -c7) -d > /tmp/images.txt
+            docker-compose down
             echo TAG_NGINX=$(echo $GITHUB_SHA | head -c7) > .env  
             docker-compose  up  -d
             docker system prune --all -f
