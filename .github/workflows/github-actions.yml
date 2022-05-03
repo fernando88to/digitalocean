@@ -64,9 +64,7 @@ jobs:
             # Login to registry
             docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com
             # pull imagem first
-            docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
-            # remove all old images
-            #docker image rm $(echo $REGISTRY)/$(echo $IMAGE_NAME)
+            docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)            
             # Stop running container
             docker stop $(echo $IMAGE_NAME)
             # Remove old container
@@ -77,6 +75,8 @@ jobs:
             -p 80:80 \
             --name $(echo $IMAGE_NAME) \
             $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            # remove image not used anymore
+            docker rmi $(docker images $(echo $REGISTRY)/$(echo $IMAGE_NAME) -q)
             
             
             
