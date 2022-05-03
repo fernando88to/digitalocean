@@ -77,7 +77,7 @@ jobs:
             # Login to registry
             docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com
             cd /app/nginx
-            docker-compose up -d --build
+            #docker-compose up -d --build
             
             
             
