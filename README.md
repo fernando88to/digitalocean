@@ -21,6 +21,7 @@ sudo systemctl status docker
 ### Liberar as portas no droplet
 
 ```
+sudo ufw enable
 sudo ufw allow 80
 sudo ufw allow 443
 ```
