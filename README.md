@@ -3,6 +3,28 @@
 Projeto de estudo de implantação de container com a digital ocean
 
 
+### Instalação do docker no droplet
+
+```
+#https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo apt update
+apt-cache policy docker-ce
+sudo apt install docker-ce
+sudo systemctl status docker
+```
+
+
+### Liberar as portas no droplet
+
+```
+sudo ufw allow 80
+sudo ufw allow 443
+```
+
 
 ### Configuração do github actions
 
@@ -10,22 +32,22 @@ Criar par de chave
     nome : ssh manjaro casa
     conteudo da chave pública cat ~/.ssh/id_rsa.pub
     
-    
+
+
+### Para fazer acesso ssh no droptlet da minha máquina
+
+A chave pública da minha máquina está configurada no dropt
+
 Para fazer o ssh basta:
 
 ```
 ssh root@167.71.240.178
 ```
 
-
-Examplo do github actions
-
-    https://github.com/appleboy/ssh-action 
-
-
 ### Configuração do registry privado na digital ocean
 
-Cria um registry privado
+Cria um registry privado.
+A Criação de chave fica no menu  lateral chamado API 
 
 Cria uma API Token
     Para testar :
@@ -38,4 +60,4 @@ docker login registry.digitalocean.com
 ```
 
 
-https://faun.pub/full-ci-cd-with-docker-github-actions-digitalocean-droplets-container-registry-db2938db8246
+
