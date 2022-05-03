@@ -81,6 +81,11 @@ docker login registry.digitalocean.com
 ### Configuração do lestencrypt
 
 https://mindsers.blog/post/https-using-nginx-certbot-docker/
+
+
+docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d example.org
+docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --email fernando88to@gmail.com --agree-tos --staging -d applicacao.dev.br -d www.applicacao.dev.br
+
 https://www.cloudbooklet.com/how-to-install-nginx-and-lets-encrypt-with-docker-ubuntu-20-04/
 
 
