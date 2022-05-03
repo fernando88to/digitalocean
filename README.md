@@ -22,6 +22,7 @@ sudo systemctl status docker
 
 ```
 sudo ufw enable
+sudo ufw allow ssh
 sudo ufw allow 80
 sudo ufw allow 443
 ```
