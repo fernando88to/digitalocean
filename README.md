@@ -92,3 +92,7 @@ docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/cert
 https://www.cloudbooklet.com/how-to-install-nginx-and-lets-encrypt-with-docker-ubuntu-20-04/
 
 
+
+http://applicacao.dev.br/.well-known/acme-challenge/Zw3LgZGKLd8A3xFY_UQPSQGGEqnE9VjrcD_RzCUGxd0
+
+
