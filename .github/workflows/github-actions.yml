@@ -83,7 +83,7 @@ jobs:
             # Stop running container
             docker-compose down
             echo TAG_NGINX=$(echo $GITHUB_SHA | head -c7) > .env  
-            docker-compose  up  -d
+            docker-compose  up  -d --build
             docker system prune --all -f
             
             
