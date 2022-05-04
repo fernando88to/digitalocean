@@ -22,6 +22,7 @@ services:
       - ./certbot/conf/:/etc/letsencrypt/:rw
     depends_on:
       - nginx_dev
+    command: certonly --webroot --webroot-path /var/www/certbot/ --email fernando88to@gmail.com --agree-tos --staging -d applicacao.dev.br -d www.applicacao.dev.br
     #command: certonly --webroot --webroot-path=/var/www/html --email fernando88to@gmail.com --agree-tos --no-eff-email --staging -d applicacao.dev.br  -d applicacao.dev.br
     networks:
       - default
