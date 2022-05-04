@@ -25,6 +25,7 @@ services:
     #command: certonly --webroot --webroot-path=/var/www/html --email fernando88to@gmail.com --agree-tos --no-eff-email --staging -d applicacao.dev.br  -d applicacao.dev.br
     networks:
       - default
+    tty: true
 
 networks:
   default:
