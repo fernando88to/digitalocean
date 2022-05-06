@@ -83,6 +83,18 @@ docker login registry.digitalocean.com
 
 ### Configuração do lestencrypt
 
+
+a primeira vez tem que entrar no ssh e dar o seguinte comando dentro de /app/nginx .
+No arquivo do nginx a parte do https tem que está desativar
+
+docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d applicacao.dev.br -d www.applicacao.dev.br
+
+
+Ativar o https no nginx 
+
+
+
+
 https://mindsers.blog/post/https-using-nginx-certbot-docker/
 
 
