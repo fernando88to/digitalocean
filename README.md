@@ -91,6 +91,8 @@ docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/cert
 docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d applicacao.dev.br -d www.applicacao.dev.br
 docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --email fernando88to@gmail.com --agree-tos -d applicacao.dev.br -d www.applicacao.dev.br
 
+docker-compose run --rm  certbot ls /var/www/certbot/ 
+
 https://www.cloudbooklet.com/how-to-install-nginx-and-lets-encrypt-with-docker-ubuntu-20-04/
 
 
