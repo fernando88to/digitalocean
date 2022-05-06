@@ -8,25 +8,25 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
-      - ./dhparam:/etc/ssl/certs
+      #- ./certbot/www:/var/www/certbot/:ro
+      #- ./certbot/conf/:/etc/nginx/ssl/:ro
+      #- ./dhparam:/etc/ssl/certs
     restart: always
     networks:
       - default
 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-    depends_on:
-      - nginx_dev
-    command: certonly --webroot --webroot-path /var/www/certbot/ --email fernando88to@gmail.com --agree-tos  -d applicacao.dev.br -d www.applicacao.dev.br
-    networks:
-      - default
-    tty: true
+#  certbot:
+#    image: certbot/certbot
+#    container_name: certbot
+#    volumes:
+#      - ./certbot/www/:/var/www/certbot/:rw
+#      - ./certbot/conf/:/etc/letsencrypt/:rw
+#    depends_on:
+#      - nginx_dev
+#    command: certonly --webroot --webroot-path /var/www/certbot/ --email fernando88to@gmail.com --agree-tos  -d applicacao.dev.br -d www.applicacao.dev.br
+#    networks:
+#      - default
+#    tty: true
 
 networks:
   default:
