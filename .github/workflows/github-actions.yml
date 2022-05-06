@@ -79,6 +79,9 @@ jobs:
             docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com
             # pull imagem first
             docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            mkdir -p /app/nginx
+            mkdir -p /app/nginx/certbot/conf
+            mkdir -p /app/nginx/certbot/www
             cd /app/nginx
             #cria a pasta se ela não existir
             mkdir -p dhparam
