@@ -110,7 +110,10 @@ docker-compose run --rm  certbot renew --dry-run
 
 testar o processo
 
-docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d example.org
+```
+docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d applicacao.dev.br -d www.applicacao.dev.br
+```
+
 
 ### Secrets necessárias no github 
 
