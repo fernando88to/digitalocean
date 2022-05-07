@@ -105,22 +105,17 @@ docker-compose run --rm  certbot certonly --force-renewal --webroot --webroot-pa
 docker-compose kill -s SIGHUP nginx_dev
 ```
 
-
 Tem que configurar um crontab para rodar esse comando no host. (esses aqui não funcionaram) 
 
 ```
 #Renova o certificado
-docker-compose run --rm  certbot renew 
+docker-compose run --rm  certbot renew --webroot --webroot-path /var/www/certbot/ 
 #Testa a renovação
-docker-compose run --rm  certbot renew --dry-run --webroot --webroot-path /var/www/certbot/ 
-docker-compose run --no-deps --rm  certbot renew --dry-run
+docker-compose run --rm  certbot renew --dry-run --webroot --webroot-path /var/www/certbot/
+ 
 ```
 
-testar o processo
 
-```
-docker-compose run  --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d applicacao.dev.br -d www.applicacao.dev.br
-```
 
 
 ### Secrets necessárias no github 
