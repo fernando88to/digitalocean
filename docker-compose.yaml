@@ -10,7 +10,7 @@ services:
     volumes:
       - ./certbot/www:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/nginx/ssl/:rw
-      #- ./dhparam:/etc/ssl/certs
+      - ./dhparam:/etc/ssl/certs
     restart: always
     networks:
       - default
