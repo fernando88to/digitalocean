@@ -105,6 +105,8 @@ Tem que configurar um crontab para rodar esse comando no host.
 
 ```
 #Renova o certificado
+docker-compose run --rm  certbot renew 
+#Testa a renovação
 docker-compose run --rm  certbot renew --dry-run
 ```
 
