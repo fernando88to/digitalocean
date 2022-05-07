@@ -98,22 +98,28 @@ No arquivo do nginx a parte do https tem que está desativar
 ```
 #Criar o certificado inicial
 docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d applicacao.dev.br -d www.applicacao.dev.br
+
+#força a renovação na marra
+docker-compose run --rm  certbot certonly --force-renewal --webroot --webroot-path /var/www/certbot/ -d applicacao.dev.br -d www.applicacao.dev.br
+# depois de atualizado o certificado, tem que atualizar o nginx
+docker-compose kill -s SIGHUP nginx_dev
 ```
 
 
-Tem que configurar um crontab para rodar esse comando no host. 
+Tem que configurar um crontab para rodar esse comando no host. (esses aqui não funcionaram) 
 
 ```
 #Renova o certificado
 docker-compose run --rm  certbot renew 
 #Testa a renovação
-docker-compose run --rm  certbot renew --dry-run
+docker-compose run --rm  certbot renew --dry-run --webroot --webroot-path /var/www/certbot/ 
+docker-compose run --no-deps --rm  certbot renew --dry-run
 ```
 
 testar o processo
 
 ```
-docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d applicacao.dev.br -d www.applicacao.dev.br
+docker-compose run  --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d applicacao.dev.br -d www.applicacao.dev.br
 ```
 
 
