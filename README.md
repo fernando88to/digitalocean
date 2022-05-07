@@ -31,9 +31,16 @@ sudo ufw allow 443
 
 ### Configuração do github actions
 
-Criar par de chave
-    nome : ssh manjaro casa
-    conteudo da chave pública cat ~/.ssh/id_rsa.pub
+Criar par de chave 
+```
+#Comando para criar par de chave
+ssh-keygen
+```
+
+
+nome : ssh manjaro casa
+
+conteudo da chave pública cat ~/.ssh/id_rsa.pub
     
 
 
@@ -49,11 +56,11 @@ ssh root@167.71.240.178
 
 ### Configuração do registry privado na digital ocean
 
-Cria um registry privado.
-A Criação de chave fica no menu  lateral chamado API 
+1. Cria um registry privado.
+2. A Criação de chave fica no menu  lateral chamado API
+3. Cria uma API Token no menu lateral.
 
-Cria uma API Token
-    Para testar :
+4. Para testar :
 
 ```
 docker login registry.digitalocean.com
@@ -65,50 +72,52 @@ docker login registry.digitalocean.com
 
 ### Processo de registro do domínio
 
-* Criar um registro no registro.br
-* Depois de pago e registrado 
-* Na digital ocean vai no menu lateral Networking e adiciona o dominio apotando para um droplet
-* Ainda na digital ocean 
-* Abre o registro.br e vai para a seção de registro (DNS) seleciona 
+1. Criar um registro no registro.br
+2. Depois de pago e registrado 
+3. Na digital ocean vai no menu lateral Networking e adiciona o dominio apotando para um droplet
+4. Ainda na digital ocean 
+5. Abre o registro.br e vai para a seção de registro (DNS) seleciona 
 
 
 
-### Registro do dominio
+### Registro do dominio na digital ocean
 
-* Vai no menu lateral em doplets, seleciona o droplet e vai para a opção 'Add a domain'
-* Adiciona o dominio e verifica se o dominio está livre, se estiver vai aparecer vários dados em abaixo.
-* Vai no registro BR e já coloca os 3 DNS padrão da digital ocean
-* Pronto
-* Para funcionar com www, vai na seção de registros opção 'CNAME' no hostname coloca 'www' , alias '@'. Para esse isso funcionar tem que configurar no nginx.
+1. Vai no menu lateral em doplets, seleciona o droplet e vai para a opção 'Add a domain'
+2. Adiciona o dominio e verifica se o dominio está livre, se estiver vai aparecer vários dados em abaixo.
+3. Vai no registro BR e já coloca os 3 DNS padrão da digital ocean
+4. Pronto
+5. Para funcionar com www, vai na seção de registros opção 'CNAME' no hostname coloca 'www' , alias '@'. Para esse isso funcionar tem que configurar no nginx.
+
 
 ### Configuração do lestencrypt
 
+A primeira vez tem que entrar no ssh e dar o seguinte comando dentro de /app/nginx.
 
-a primeira vez tem que entrar no ssh e dar o seguinte comando dentro de /app/nginx .
 No arquivo do nginx a parte do https tem que está desativar
 
+```
+#Criar o certificado inicial
 docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d applicacao.dev.br -d www.applicacao.dev.br
+```
 
 
-Ativar o https no nginx 
+Tem que configurar um crontab para rodar esse comando no host. 
+
+```
+#Renova o certificado
+docker-compose run --rm  certbot renew --dry-run
+```
 
 
+### Secrets necessárias no github 
 
+A secret são utilizdas pelo github actions.
 
-https://mindsers.blog/post/https-using-nginx-certbot-docker/
-
-
-docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d example.org
-
-docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d applicacao.dev.br -d www.applicacao.dev.br
-docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --email fernando88to@gmail.com --agree-tos -d applicacao.dev.br -d www.applicacao.dev.br
-
-docker-compose run --rm  certbot ls /var/www/certbot/ 
-
-https://www.cloudbooklet.com/how-to-install-nginx-and-lets-encrypt-with-docker-ubuntu-20-04/
-
-
-
-http://applicacao.dev.br/.well-known/acme-challenge/Zw3LgZGKLd8A3xFY_UQPSQGGEqnE9VjrcD_RzCUGxd0
-
+| CHAVE | CATEGIRUA     | OBSERVAÇÃO           |
+|------|---------------|----------------------|
+| HOST | IP DO DROPLET |                      |
+| KEY  | Chave privada do droplet | ~/.ssh/id_rsa (host) |
+| PORT     | Porta de acesso ao ssh | |
+| TOKEN_REGISTRY_DIGITAL_OCEAN     |Token de acesso ao registry digital ocean | |
+| USERNAME     |Usuário do ssh do droplet | |
 
