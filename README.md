@@ -108,6 +108,9 @@ Tem que configurar um crontab para rodar esse comando no host.
 docker-compose run --rm  certbot renew --dry-run
 ```
 
+testar o processo
+
+docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d example.org
 
 ### Secrets necessárias no github 
 
