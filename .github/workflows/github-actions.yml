@@ -106,7 +106,7 @@ jobs:
             #só funciona sem a extensão
             mv -f /etc/cron.daily/renew_certificados.sh /etc/cron.daily/renew_certificados
             # dar permissão de execução para o script de renovação do certificado, esse script não pode ter extensão .sh
-            chmod +x /etc/cron.daily/renew_cerificados
+            chmod +x /etc/cron.daily/renew_certificados
 
   deploy:
     runs-on: ubuntu-latest
