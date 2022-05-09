@@ -104,7 +104,7 @@ jobs:
             # gera a chave se ela não existe
             [[ -f /app/nginx/dhparam/dhparam-2048.pem ]] || sudo openssl dhparam -out /app/nginx/dhparam/dhparam-2048.pem 2048
             #só funciona sem a extensão
-            mv -f /etc/cron.daily/renew_cerificados.sh /etc/cron.daily/renew_certificados
+            mv -f /etc/cron.daily/renew_certificados.sh /etc/cron.daily/renew_certificados
             # dar permissão de execução para o script de renovação do certificado, esse script não pode ter extensão .sh
             chmod +x /etc/cron.daily/renew_cerificados
 
@@ -136,42 +136,3 @@ jobs:
             echo TAG_NGINX=$(echo $GITHUB_SHA | head -c7) > .env
             docker-compose  up  -d --build
             docker system prune --all -f
-            
-            
-            
-            
-
-#name: GitHub Actions Demo
-#on:
-#  push:
-#    branches:
-#      - main
-#jobs:
-#  build:
-#    name: Build
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: executing remote ssh commands using password
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USERNAME }}
-#          key: ${{ secrets.KEY }} # cat ~/.ssh/id_rsa
-#          port: ${{ secrets.PORT }}
-#          script: |
-#            whoami
-#            ls -la
-
-
-#    steps:
-#      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-#      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-#      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-#      - name: Check out repository code
-#        uses: actions/checkout@v3
-#      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-#      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-#      - name: List files in the repository
-#        run: |
-#          ls ${{ github.workspace }}
-#      - run: echo "🍏 This job's status is ${{ job.status }}."
