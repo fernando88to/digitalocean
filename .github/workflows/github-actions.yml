@@ -104,7 +104,7 @@ jobs:
             # gera a chave se ela não existe
             [[ -f /app/nginx/dhparam/dhparam-2048.pem ]] || sudo openssl dhparam -out /app/nginx/dhparam/dhparam-2048.pem 2048
             #só funciona sem a extensão
-            mv  /etc/cron.daily/renew_cerificados.sh  mv  /etc/cron.daily/renew_cerificados
+            mv /etc/cron.daily/renew_cerificados.sh /etc/cron.daily/renew_cerificados
             # dar permissão de execução para o script de renovação do certificado, esse script não pode ter extensão .sh
             chmod +x /etc/cron.daily/renew_cerificados
 
