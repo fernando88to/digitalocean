@@ -72,7 +72,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }} # cat ~/.ssh/id_rsa
-          source: "nginx/renew_cerificados"
+          source: "nginx/renew_certificados"
           target: "/etc/cron.daily"
 
 
