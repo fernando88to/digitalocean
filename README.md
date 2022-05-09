@@ -102,6 +102,7 @@ docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/cert
 #força a renovação na marra
 docker-compose run --rm  certbot certonly --force-renewal --webroot --webroot-path /var/www/certbot/ -d applicacao.dev.br -d www.applicacao.dev.br
 # depois de atualizado o certificado, tem que atualizar o nginx
+# enviará um sinal SIGHUP para o contêiner webserver recarregar a configuração do Nginx
 docker-compose kill -s SIGHUP nginx_dev
 ```
 
@@ -109,7 +110,9 @@ Tem que configurar um crontab para rodar esse comando no host. (esses aqui não 
 
 ```
 #Renova o certificado
-docker-compose run --rm  certbot renew --webroot --webroot-path /var/www/certbot/ 
+docker-compose run --rm  certbot renew --webroot --webroot-path /var/www/certbot/
+#depois de atualizado o certificado, tem que atualizar o nginx, esse comando é super rápido
+docker-compose kill -s SIGHUP nginx_dev 
 #Testa a renovação
 docker-compose run --rm  certbot renew --dry-run --webroot --webroot-path /var/www/certbot/
  

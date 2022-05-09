@@ -59,12 +59,60 @@ jobs:
           source: "docker-compose.yaml"
           target: "/app/nginx" # esse diretorio tem que está criado
 
+  copy_script_renew_cert:
+    runs-on: ubuntu-latest
+    needs:
+      - build_and_push
+      - copy_docker_compose
+    steps:
+      - uses: actions/checkout@master
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }} # cat ~/.ssh/id_rsa
+          source: "renew_cerificados"
+          target: "/etc/cron.daily"
+
+
+  config_nginx:
+    runs-on: ubuntu-latest
+    needs:
+      - build_and_push
+      - copy_docker_compose
+      - copy_script_renew_cert
+
+    steps:
+      - name: Configura o nginx
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }} # cat ~/.ssh/id_rsa
+          envs: IMAGE_NAME,REGISTRY,{{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }},GITHUB_SHA
+          script: |
+            #cria diretorio de trabalho do nginx
+            mkdir -p /app/nginx
+            #cria diretorio aonde ficam os certificados de configuração do lestencrypt
+            mkdir -p /app/nginx/certbot/conf
+            #criar diretorio de trabalho aonde é feita o upload dos arquivps para validação do certificados.
+            mkdir -p /app/nginx/certbot/www
+            cd /app/nginx
+            #cria a pasta se ela não existir
+            mkdir -p dhparam
+            # gera a chave se ela não existe
+            [[ -f /app/nginx/dhparam/dhparam-2048.pem ]] || sudo openssl dhparam -out /app/nginx/dhparam/dhparam-2048.pem 2048
+            # dar permissão de execução para o script de renovação do certificado, esse script não pode ter extensão .sh
+            chmdo +x /etc/cron.daily/renew_cerificados
+
   deploy:
     runs-on: ubuntu-latest
     needs:
       - build_and_push
       - copy_docker_compose
-
+      - copy_script_renew_cert
+      - config_nginx
 
     steps:
       - name: Deploy to Digital Ocean droplet via SSH action
@@ -78,20 +126,14 @@ jobs:
             # Login to registry
             docker login -u ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} -p ${{ secrets.TOKEN_REGISTRY_DIGITAL_OCEAN }} registry.digitalocean.com
             # pull imagem first
-            docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
-            mkdir -p /app/nginx
-            mkdir -p /app/nginx/certbot/conf
-            mkdir -p /app/nginx/certbot/www
-            cd /app/nginx
-            #cria a pasta se ela não existir
-            mkdir -p dhparam
-            # gera a chave se ela não existe
-            [[ -f /app/nginx/dhparam/dhparam-2048.pem ]] || sudo openssl dhparam -out /app/nginx/dhparam/dhparam-2048.pem 2048
+            docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)            
+            cd /app/nginx            
             # Stop running container
             docker-compose down
-            echo TAG_NGINX=$(echo $GITHUB_SHA | head -c7) > .env  
+            # joga a tag da imagem mais recente gerada no arquivo .env
+            echo TAG_NGINX=$(echo $GITHUB_SHA | head -c7) > .env
             docker-compose  up  -d --build
-            docker system prune --all -f            
+            docker system prune --all -f
             
             
             
