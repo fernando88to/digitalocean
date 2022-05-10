@@ -1,6 +1,14 @@
-## Digital Ocean
+## Projeto de Estudo - Digital Ocean
 
-Projeto de estudo de implantação de container com a digital ocean
+Projeto de estudo de implantação das seguintes tecnologias na digital ocean
+
+* Digital ocean
+* container
+* nginx
+* letsencrypt
+* github actions
+* dominio https://applicacao.dev.br/
+
 
 
 ### Instalação do docker no droplet
