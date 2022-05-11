@@ -12,8 +12,6 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/:rw
       - ./dhparam:/etc/ssl/certs
     restart: always
-    networks:
-      - default
 
   certbot:
     image: certbot/certbot
@@ -23,11 +21,10 @@ services:
       - ./certbot/conf/:/etc/letsencrypt/:rw
     depends_on:
       - nginx_dev
-    command: certonly --webroot --webroot-path /var/www/certbot/ --email fernando88to@gmail.com --agree-tos  -d applicacao.dev.br -d www.applicacao.dev.br
-    networks:
-      - default
-    tty: true
+    #command: certonly --webroot --webroot-path /var/www/certbot/ --email fernando88to@gmail.com --agree-tos  -d applicacao.dev.br -d www.applicacao.dev.br
+    #tty: true
 
 networks:
   default:
-    driver: bridge
+    external:
+      name: external-rede

@@ -25,6 +25,11 @@ sudo apt install docker-ce
 sudo systemctl status docker
 ```
 
+### Criação da rede externa que irá prover a comunicação entre os serviços nos diferentes docker composes
+
+```
+    docker network create external-rede
+```
 
 ### Liberar as portas no droplet
 
