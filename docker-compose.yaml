@@ -12,6 +12,7 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/:rw
       - ./dhparam:/etc/ssl/certs
     restart: always
+    hostname: nginx
 
   certbot:
     image: certbot/certbot
